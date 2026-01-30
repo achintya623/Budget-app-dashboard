@@ -6,6 +6,7 @@ import TransactionsSection from "./components/TransactionsSection";
 
 function App() {
   const [sliderMonth, setSliderMonth] = useState({ year: 2024, month: 12 });
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleMonthAdd = () => {
     if (sliderMonth.month < 12) {
@@ -14,6 +15,7 @@ function App() {
     if (sliderMonth.month === 12) {
       setSliderMonth({ year: sliderMonth.year + 1, month: 1 });
     }
+    setCurrentPage(1);
   };
 
   const handleMonthSubtract = () => {
@@ -23,6 +25,7 @@ function App() {
     if (sliderMonth.month === 1) {
       setSliderMonth({ year: sliderMonth.year - 1, month: 12 });
     }
+    setCurrentPage(1);
   };
   let showMonth = "";
   switch (sliderMonth.month) {
@@ -117,7 +120,11 @@ function App() {
       </section>
       <section className="w-full flex gap-5 h-[50vh]">
         <ChartSection TransactionsForMonth={TransactionsForMonth} />
-        <TransactionsSection TransactionsForMonth={TransactionsForMonth} />
+        <TransactionsSection
+          TransactionsForMonth={TransactionsForMonth}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </section>
     </div>
   );

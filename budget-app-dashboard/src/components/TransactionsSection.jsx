@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import TableRow from "./TableRow";
 
-export default function TransactionsSection({ TransactionsForMonth }) {
-  const [currentPage, setCurrentPage] = useState(1);
+export default function TransactionsSection({
+  TransactionsForMonth,
+  currentPage,
+  setCurrentPage,
+}) {
   const itemsPerPage = 5;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -16,13 +19,16 @@ export default function TransactionsSection({ TransactionsForMonth }) {
 
   return (
     <div className=" bg-white w-[55%] rounded-2xl shadow-2xl">
-      <table>
+      <div className="w-full h-[20%] flex items-center px-10 text-2xl font-bold">
+        Transactions This Month
+      </div>
+      <table className="w-full h-[60%] table-fixed">
         <thead>
           <tr>
-            <th>Payee</th>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Category</th>
+            <th className="w-[30%]">Payee</th>
+            <th className="w-[20%]">Date</th>
+            <th className="w-[25%]">Amount</th>
+            <th className="w-[25%]">Category</th>
           </tr>
         </thead>
         <tbody>
@@ -34,9 +40,13 @@ export default function TransactionsSection({ TransactionsForMonth }) {
           ))}
         </tbody>
       </table>
-      <div>
+      <div className="w-full h-[20%] flex items-center justify-center gap-4">
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-          <button key={page} onClick={() => setCurrentPage(page)}>
+          <button
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={currentPage === page ? `text-blue-700` : `text-black`}
+          >
             {page}
           </button>
         ))}
